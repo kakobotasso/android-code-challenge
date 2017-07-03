@@ -16,12 +16,11 @@ Sua aplicação deve conter:
     * Mapa com os markers de resultado;
 * Permitir acesso a minha localização no momento que a funcionalidade for necessária;
 * O mapa deve mostrar um pin indicando a minha localização e alguns markers mostrando o titulo da vaga e a cidade em que ela está;
+
 Você pode ajustar a interface como achar melhor, de modo que a navegação seja agradável e fluida.
 
 Bônus (não eliminatório):
 * Aplicação feita em kotlin;
-* Desenvolver com RX;
-* Arquitetura MVP ou MVVM;
 
 ## Pré-requisitos
 
