@@ -15,10 +15,14 @@ import com.github.jksiezni.permissive.PermissionsGrantedListener;
 import com.github.jksiezni.permissive.PermissionsRefusedListener;
 import com.github.jksiezni.permissive.Permissive;
 
+import br.com.kakobotasso.elcodechallenge.utils.Constantes;
+import br.com.kakobotasso.elcodechallenge.utils.Permissoes;
+
 public class MainActivity extends AppCompatActivity {
 
     boolean usaLocalizacao = false;
     private CheckBox checkLocalizacao;
+    private Permissoes permissoes = new Permissoes(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if( isChecked ){
-                    if( temPermissaoLocalizacao() ){
+                    if( permissoes.temPermissaoLocalizacao() ){
                         usaLocalizacao = true;
                     } else {
                         pedePermissaoLocalizacao();
@@ -44,16 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void buscar(View v){
         Intent mapa = new Intent(this, MapaActivity.class);
-        mapa.putExtra("localizacao", usaLocalizacao);
+        mapa.putExtra(Constantes.CHAVE_LOCALIZACAO, usaLocalizacao);
         startActivity(mapa);
-    }
-
-    private boolean temPermissaoLocalizacao(){
-        if(Permissive.checkPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-            return true;
-        }
-
-        return false;
     }
 
     private void pedePermissaoLocalizacao(){
