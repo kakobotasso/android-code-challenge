@@ -1,8 +1,13 @@
 package br.com.kakobotasso.elcodechallenge;
 
+import android.Manifest;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.github.jksiezni.permissive.Permissive;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -10,14 +15,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
 public class MapaActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private boolean usaLocalizacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
+
+        usaLocalizacao = getIntent().getBooleanExtra("localizacao", false);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -38,9 +49,38 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        if( usaLocalizacao ){
+            LatLng posicaoAtual = getGPS();
+            mMap.addMarker(new MarkerOptions().position(posicaoAtual).title("Posição Atual"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(posicaoAtual));
+        }else{
+            // Add a marker in Sydney and move the camera
+            LatLng centro = new LatLng(0, 0);
+            mMap.addMarker(new MarkerOptions().position(centro).title("Marker in Sydney"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(centro));
+        }
+    }
+
+    private LatLng getGPS() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        List<String> providers = lm.getProviders(true);
+        LatLng retorno = null;
+
+/* Loop over the array backwards, and if you get an accurate location, then break                 out the loop*/
+        Location l = null;
+
+        for (int i=providers.size()-1; i>=0; i--) {
+            if(Permissive.checkPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)){
+                l = lm.getLastKnownLocation(providers.get(i));
+            }
+
+            if (l != null) break;
+        }
+
+        double[] gps = new double[2];
+        if (l != null) {
+            retorno = new LatLng(l.getLatitude(), l.getLongitude());
+        }
+        return retorno;
     }
 }

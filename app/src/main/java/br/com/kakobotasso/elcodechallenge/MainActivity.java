@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void buscar(View v){
         Intent mapa = new Intent(this, MapaActivity.class);
+        mapa.putExtra("localizacao", usaLocalizacao);
         startActivity(mapa);
     }
 
