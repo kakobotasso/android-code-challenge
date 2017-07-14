@@ -30,6 +30,8 @@
         android:id="@+id/btn_buscar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_buscar"/>
+        android:text="@string/btn_buscar"
+        android:onClick="buscar"
+        />
 
 </LinearLayout>

@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">ELCodeChallenge</string>
+    <string name="ok">OK</string>
+    <string name="tentar_novamente">Tentar novamente</string>
 
     <!-- MainActivity -->
     <string name="hint_busca">Buscar termo</string>
     <string name="usar_localizacao">Usar localização</string>
     <string name="btn_buscar">Buscar</string>
+    <string name="alert_titulo">Permissão negada</string>
+    <string name="alert_descricao">Atenção, dessa maneira não conseguiremos exibir as vagas mais próximas a você</string>
+    <string name="title_activity_mapa">Mapa de Vagas</string>
 </resources>
