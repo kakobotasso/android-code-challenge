@@ -2,6 +2,7 @@ package br.com.kakobotasso.elcodechallenge;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteOutOfMemoryException;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buscar(View v){
-        System.out.println("REALIZAR BUSCA");
+        Intent mapa = new Intent(this, MapaActivity.class);
+        startActivity(mapa);
     }
 
     private boolean temPermissaoLocalizacao(){
