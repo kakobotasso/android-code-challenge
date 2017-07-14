@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ELCodeChallenge</string>
+
+    <!-- MainActivity -->
+    <string name="hint_busca">Buscar termo</string>
+    <string name="usar_localizacao">Usar localização</string>
+    <string name="btn_buscar">Buscar</string>
 </resources>

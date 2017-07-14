@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.kakobotasso.elcodechallenge.MainActivity">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_gravity="center"
-        />
+        android:layout_width="match_parent">
+
+        <EditText
+            android:id="@+id/termo_busca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_busca" />
+
+    </android.support.design.widget.TextInputLayout>
+    
+    <CheckBox
+        android:id="@+id/localizacao_busca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/usar_localizacao"/>
+
+    <Button
+        android:id="@+id/btn_buscar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_buscar"/>
 
 </LinearLayout>
